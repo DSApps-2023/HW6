@@ -1,4 +1,4 @@
-FFROM rocker/tidyverse:4.0.3
+FFROM rocker/tidyverse:4.1.2
 
 RUN install2.r --error \
     --deps TRUE \
