@@ -1,5 +1,5 @@
 ---
-title: "DSApps 2021 @ TAU: Assignment 6"
+title: "DSApps 2022 @ TAU: Assignment 6"
 author: "Giora Simchoni"
 date: "`r Sys.Date()`"
 output: 
@@ -19,18 +19,18 @@ Welcome to Assignment 6 in R!
 Remember:
 
 * You can play with the assignment in Playground mode, but:
-* Only your private Github repository assigned to you by the course admin will be cloned and graded (Submission mode, see instructions [here](https://github.com/DSApps-2021/Class_Slides/blob/master/Apps_of_DS_HW.pdf))
+* Only your private Github repository assigned to you by the course admin will be cloned and graded (Submission mode, see instructions [here](https://github.com/DSApps-2022/Class_Slides/blob/master/Apps_of_DS_HW.pdf))
 * Like any other University assignment, your work should remain private
-* You need to `git clone` your private Github repository locally as explained [here](https://github.com/DSApps-2021/Class_Slides/blob/master/Apps_of_DS_HW.pdf)
+* You need to `git clone` your private Github repository locally as explained [here](https://github.com/DSApps-2022/Class_Slides/blob/master/Apps_of_DS_HW.pdf)
 * You need to uncomment the starter code inside the chunk, replace the `### YOUR CODE HERE ###`, run the chunk and see that you're getting the expected result
 * Pay attention to what you're asked to do and the required output
 * For example, using a *different* function than the one you were specifically asked to use, will decrease your score (unless you amaze me)
 * Your notebook should run smoothly from start to end if someone presses in the RStudio toolbar Run --> Restart R and Run All Chunks
 * When you're done knit the entire notebook into a html file, this is the file that would be graded
 * You can add other files but do not delete any files
-* Commit your work and push to your private Github repository as explained [here](https://github.com/DSApps-2021/Class_Slides/blob/master/Apps_of_DS_HW.pdf)
+* Commit your work and push to your private Github repository as explained [here](https://github.com/DSApps-2022/Class_Slides/blob/master/Apps_of_DS_HW.pdf)
 
-This assignemtnt is due: 31/5 23:59
+This assignemtnt is due: 22/5 23:59
 
 ### Packages
 
@@ -59,7 +59,7 @@ That's right. I have scraped [ebay](https://il.ebay.com/b/Womens-Heels/55793/bn_
 
 You will have 7 attempts at submitting the predicted price of the hidden shoes, and whoever reaches the lowest RMSE - wins!
 
-Be sure to visit our [Leaderboard](https://dsapps-2021.github.io/Class_Slides/leaderboard.html) to see the best scores.
+Be sure to visit our [Leaderboard](https://dsapps-2022.github.io/Class_Slides/leaderboard.html) to see the best scores.
 
 ### Basic Exploration
 
@@ -216,7 +216,7 @@ tr_price_mean_cat_cond_brand <- shoes_train_tr %>%
   summarise(price_mean = mean(log(price)))
 
 pred_price_cat_cond_brand <- shoes_train_te %>%
-  inner_join(tr_price_mean_cat_cond_brand, by = c("category", "condition", "brand")) %>%
+  left_join(tr_price_mean_cat_cond_brand, by = c("category", "condition", "brand")) %>%
   pull(price_mean)
 
 rmse_vec(log(shoes_train_te$price), pred_price_cat_cond_brand)
@@ -262,13 +262,15 @@ shoes_test %>%
   write_csv("model01.csv")
 ```
 
-Drop me a mail either by actually sending me a mail or opening an issue in your repo and assigning it to me, and wait to see your result on the [Leaderboard!](https://dsapps-2021.github.io/Class_Slides/leaderboard.html)
+Drop me a mail either by actually sending me a mail or opening an issue in your repo and assigning it to me, and wait to see your result on the [Leaderboard!](https://dsapps-2022.github.io/Class_Slides/leaderboard.html)
 
 **WARNING**: Be sure to name your models differently, otherwise your last result might run over your previous result, and you won't know which is which!
 
+At the end of the period you should have a single pdf page with a short bulleted summary of what you did.
+
 ### Further Instructions
 
-- ALL MUST REPRODUCE
+- ALL MUST REPRODUCE (R or Python - you should have a notebook I can run)
 - You may not under any circumstances overfit to the testing set (use your creativity for building a better model!)
 - You may not search the price of the shoes in the testing set
 
