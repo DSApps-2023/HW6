@@ -234,7 +234,7 @@ rmse_vec(log(shoes_train_te$price), pred_lm)
 
 ### What you need to do
 
-##### (100 points)
+##### (90 points)
 
 Build a sensible model, with your ML method of choice, to predict the `log(price)` of the 1,044 shoes in `shoes_test`.
 
@@ -268,11 +268,39 @@ Drop me a mail either by actually sending me a mail or opening an issue in your 
 
 At the end of the period you should have a single pdf page with a short bulleted summary of what you did.
 
-### Further Instructions
+#### Further Dgeshim
 
 - ALL MUST REPRODUCE (R or Python - you should have a notebook I can run)
 - You may not under any circumstances overfit to the testing set (use your creativity for building a better model!)
 - You may not search the price of the shoes in the testing set
+
+### Paper questions
+
+##### (10 points)
+
+Read Sections 1-3 from [Tree in Tree](https://proceedings.neurips.cc/paper/2021/hash/71f6278d140af599e06ad9bf1ba03cb0-Abstract.html), an adorable paper from NeurIPS 2021 by Bingzhao Zhu, Mahsa Shoaran (of course, you're welcome to read the whole thing!).
+
+Explain in your own up to 100 words what is "Tree in Tree" and how it improves on CART:
+
+```{r}
+### YOUR ANSWER HERE ###
+```
+
+Look at Figure 2 example. The authors demonstrate very clearly how TnT can reach a more simple model than CART on these data. Please describe what would MARS do! You can either:
+
+* hypothesize what it would do and explain shortly (but you better explain it well so I'm sure you got it)
+* actually run `earth::earth()` on these data (I created it for you below in `df`) and show me the model (but you better use the right params for `earth()` otherwise you'd be left with a stump :()
+
+```{r}
+df <- expand.grid(x1 = 1:3, x2 = 1:3)
+df$y <- c(1, 0, 1, 0, 0, 0, 1, 0, 1) #1: triangle, 0: circle
+
+# plot(df$x1, df$x2, pch = df$y + 1)
+```
+
+Isn't MARS amazing?
+
+Bonus 2 points: fit `rpart` on these data and show me that tree from Figure 2(b)!
 
 ### Wrap up
 
