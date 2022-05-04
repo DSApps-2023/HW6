@@ -184,10 +184,10 @@ If we add in condition, where we treat `NA` as another category...
 
 ```{r}
 shoes_train_tr <- shoes_train_tr %>%
-  mutate(category = ifelse(is.na(category), "NA", category))
+  mutate(condition = ifelse(is.na(condition), "NA", condition))
 
 shoes_train_te <- shoes_train_te %>%
-  mutate(category = ifelse(is.na(category), "NA", category))
+  mutate(condition = ifelse(is.na(condition), "NA", condition))
 
 tr_price_mean_cat_cond <- shoes_train_tr %>%
   group_by(category, condition) %>%
@@ -225,11 +225,27 @@ rmse_vec(log(shoes_train_te$price), pred_price_cat_cond_brand)
 Throwing in interaction between category and condition and is the product sent with free shipping, though almost all coefficients are "significant", doesn't really help RMSE:
 
 ```{r}
-mod <- lm(log(price) ~ category*condition + brand + free_shipping, data = shoes_train_tr)
+shoes_train_tr <- shoes_train_tr %>%
+  mutate(free_shipping = ifelse(is.na(free_shipping), 0, free_shipping))
 
-pred_lm <- predict(mod, shoes_train_te)
+shoes_train_te <- shoes_train_te %>%
+  mutate(free_shipping = ifelse(is.na(free_shipping), 0, free_shipping))
+
+mod <- lm(log(price) ~ category * condition + brand + free_shipping, data = shoes_train_tr)
+
+pred_lm <- predict(mod, newdata = shoes_train_te)
 
 rmse_vec(log(shoes_train_te$price), pred_lm)
+
+```
+
+Throw in a visualization to see it makes sense:
+
+```{r}
+tibble(y_true = log(shoes_train_te$price), y_pred = pred_lm) %>%
+  ggplot(aes(y_true, y_pred)) +
+  geom_point(alpha = 0.5, color = "red") +
+  theme_bw()
 ```
 
 ### What you need to do
@@ -241,7 +257,9 @@ Build a sensible model, with your ML method of choice, to predict the `log(price
 ```{r}
 shoes_test_processed <- shoes_test %>%
   mutate(brand = ifelse(is.na(brand), "NA",
-                        ifelse(brand %in% top_brands, brand, "other")))
+                        ifelse(brand %in% top_brands, brand, "other")),
+         free_shipping = ifelse(is.na(free_shipping), 0, free_shipping),
+         condition = ifelse(is.na(condition), "NA", condition))
 
 pred_model01 <- predict(mod, shoes_test_processed)
 ```
