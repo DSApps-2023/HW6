@@ -12,6 +12,10 @@ subtitle: The Price is Right!
 ```{r child = "setup.Rmd"}
 ```
 
+```{r, echo=FALSE}
+options(dplyr.summarise.inform=FALSE)
+```
+
 ### Welcome
 
 Welcome to Assignment 6 in R!
@@ -30,7 +34,7 @@ Remember:
 * You can add other files but do not delete any files
 * Commit your work and push to your private Github repository as explained [here](https://github.com/DSApps-2023/Class_Slides/blob/master/Apps_of_DS_HW.pdf)
 
-This assignment is due: TBD
+This assignment is due: 19/6 23:59
 
 ### Packages
 
@@ -286,11 +290,16 @@ Drop me a mail either by actually sending me a mail or opening an issue in your 
 
 At the end of the period you should have a single pdf page with a short bulleted summary of what you did.
 
-#### Further Dgeshim
+#### Further Dgeshim and Grading
 
 - ALL MUST REPRODUCE (R or Python - you should have a notebook I can run)
 - You may not under any circumstances overfit to the testing set (use your creativity for building a better model!)
 - You may not search the price of the shoes in the testing set
+- 10 points decrease for less than 3 attempts
+- This is a competition!
+  - 10 bonus points for winning MSE
+  - 5 bonus points for 2nd and 3rd places (even if 4th place reached only 0.0001 higher RMSE)
+  - 5 points decrease if you didn't decrease below 0.56, because, I mean, really.
 
 ### Paper questions
 
@@ -298,13 +307,13 @@ At the end of the period you should have a single pdf page with a short bulleted
 
 Read Sections 1-3 from [Tree in Tree](https://proceedings.neurips.cc/paper/2021/hash/71f6278d140af599e06ad9bf1ba03cb0-Abstract.html), an adorable paper from NeurIPS 2021 by Bingzhao Zhu, Mahsa Shoaran (of course, you're welcome to read the whole thing!).
 
-Explain in your own up to 100 words what is "Tree in Tree" and how it improves on CART:
+Explain in your own words what is "Tree in Tree" and how it improves on CART:
 
 ```{r}
 ### YOUR ANSWER HERE ###
 ```
 
-Look at Figure 2 example. The authors demonstrate very clearly how TnT can reach a more simple model than CART on these data. Please describe what would MARS do! You can either:
+Look at the Figure 2 example. The authors demonstrate very clearly how TnT can reach a more simple model than CART on these data. Please describe what would MARS do! You can either:
 
 * hypothesize what it would do and explain shortly (but you better explain it well so I'm sure you got it)
 * actually run `earth::earth()` on these data (I created it for you below in `df`) and show me the model (but you better use the right params for `earth()` otherwise you'd be left with a stump :()
